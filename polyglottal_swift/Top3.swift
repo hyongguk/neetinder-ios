@@ -42,40 +42,64 @@ struct Top3: View {
     //@State private var results = [Result]()
 
     var body: some View {
-        
-        ScrollView{
-            VStack(spacing: 40){
-                if isLoading{
-                    
-                    Image(self.celeb)
-                        .resizable()
-                        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                        .scaledToFill()
-                        .frame(width: 300)
-                        .padding(100)
-                    
-//                        .transition(.slide)
-//                        .animation(.default)
-                }
-//                if(resultImage != nil){
+        ZStack{
+            LinearGradient(gradient: Gradient(colors: [Color.pink, Color.orange]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+                VStack(spacing: 40){
+                    if isLoading{
+                        
+                        Image(self.celeb)
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                            .scaledToFill()
+                            .frame(width: 300)
+                            .padding(50)
+                            .shadow(color: /*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/, radius: 5, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                            .padding(-80)
+                        Text("Loding...")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.white)
+    //                        .transition(.slide)
+    //                        .animation(.default)
+                    }
                     resultImage
+                    .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                        .frame(width: 300)
+                        .padding(.bottom, -20)
+                        .shadow(color: .white, radius: 5, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                    
+                    Text(resultname1)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .bold()
+                    
+                    Spacer()
+                    resultImage2
                         .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                Text(resultname1)
-//                }
-                
-                Spacer()
-                resultImage2
-                    .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                Text(resultname2)
-                Spacer()
-                resultImage3
-                    .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                Text(resultname3)
+                        .padding(.bottom, -20)
+                        .shadow(color:.white, radius: 5, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                    Text(resultname2)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .bold()
+                    Spacer()
+                    resultImage3
+                        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                        .padding(.bottom, -20)
+                        .shadow(color: .white, radius: 5, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                    Text(resultname3)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .bold()
+                }
+                .onAppear{
+                   // self.deleteImage()
+                    self.loadData()
+                }
             }
-            .onAppear{
-               // self.deleteImage()
-                self.loadData()
-            }
+
         }
         
         
